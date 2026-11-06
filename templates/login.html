@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Document</title>
+
+    <!-- flask managed path -->
+    <link rel="stylesheet" href="{{url_for('static', filename='style.css')}}">
+
+</head>
+
+<body>
+
+    {% if session ['logged_in'] %}
+    Youre logged in already!
+    {% else %}
+    <form action="/login" method="POST">
+        <div class="login">
+            <div class="login-screen">
+                <div class="app-title">
+                    <h1>Login</h1>
+                </div>
+                <div class="login-form">
+                    {% with messages = get_flashed_messages() %}
+                    {% for message in messages %}
+                    <p class="flash-message">{{ message }}</p>
+                    {% endfor %}
+                    {% endwith %}
+
+                    <div class="control-group">
+                        <input type="text" class="login-field" value="" placeholder="Username" name="username">
+                        <input type="password" class="login-field" value="" placeholder="Password" name="password">
+                        <label class="login-field-icon fui-lock" for="login-pass"></label>
+                    </div>
+                    <input type="submit" value="Log in" class="btn btn-primary btn-large btn-block">
+                </div>
+            </div>
+        </div>
+    </form>
+    {% endif %}
+</body>
+
+</html>
